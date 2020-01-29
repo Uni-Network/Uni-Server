@@ -1,5 +1,6 @@
-const User = require('../models').user;
-var jwt = require('jsonwebtoken');
+//const User = require('../models').user;
+import {user as User} from '../models';
+import jwt from 'jsonwebtoken';
 const env = process.env.NODE_ENV || 'development';
 const config = require(`${__dirname}/../config/config.json`)[env];
 
@@ -19,7 +20,7 @@ module.exports = {
             return res.json({"error" : true,"message" : "Password mismatch"});
           }
           var token = jwt.sign(response.toJSON(), config.secret, {
-              expiresIn: 1440 // expires in 1 hours
+              expiresIn: 10000
           });
       
           res.json({

@@ -1,4 +1,6 @@
 const Gender = require('../models').gender;
+import {getAllGenders} from '../helpers/gendersHelper';
+import { responseError } from '../utils/errorsManager/error-responses';
 
 module.exports = {
   create(req, res) {
@@ -10,11 +12,13 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },
 
-  getAllGenders(req, res) {
-    return Gender
-      .findAll()
-      .then((todos) => res.status(200).send(todos))
-      .catch((error) => res.status(400).send(error));
+  async getAllGenders(req, res) {
+    try {
+      var user = await getAllGenders();
+      res.json(user);
+  } catch (e) {
+      responseError(e, res);
+  }
   },
 
   retrieve(req, res) {

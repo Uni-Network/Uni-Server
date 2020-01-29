@@ -12,5 +12,7 @@ module.exports = (app) => {
   app.use(require('../middlewares/authentication'));
   app.get('/api/genders', gendersController.getAllGenders);
   app.get('/api/users', usersController.getAllUsers);
+  app.get('/api/users/:id', usersController.getUserById);
+
 
 };
