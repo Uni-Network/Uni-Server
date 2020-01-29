@@ -17,7 +17,7 @@ module.exports = {
   async getUserById(req, res) {
     let id = req.params.id;
     try {
-        var user = await getUserById(req.params.id);
+        var user = await getUserById(id);
         res.json(user);
     } catch (e) {
         responseError(e, res);
