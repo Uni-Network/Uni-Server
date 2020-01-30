@@ -2,6 +2,8 @@ const gendersController = require('../controllers').genders;
 const usersController = require('../controllers').users;
 import {getAllCountries,getCountryByName} from '../controllers/countries';
 import {getAllCities,getCitiesByName} from '../controllers/cities';
+import {getAllGroups,getGroupsByName} from '../controllers/groups';
+
 
 const authenticationController = require('../controllers').authentication;
 
@@ -27,6 +29,11 @@ module.exports = (app) => {
   // User Routes
   app.get('/api/users', usersController.getAllUsers);
   app.get('/api/users/:id', usersController.getUserById);
+
+
+  //Group Routes
+  app.get('/api/groups', getAllGroups);
+  app.get('/api/groups/search', getGroupsByName);
 
 
 };
