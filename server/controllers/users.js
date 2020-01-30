@@ -1,26 +1,25 @@
 
-import {getAllUsers,getUserById} from '../helpers/usersHelper';
+import {getAllUsersFromDB,getUserByIdFromDB} from '../helpers/usersHelper';
 import { responseError } from '../utils/errorsManager/error-responses';
 
-module.exports = {
   
 
-  async getAllUsers(req, res) {
-    try {
-        var users = await getAllUsers();
-        res.json(users);
-    } catch (e) {
-        responseError(e, res);
-    }
-  },
+export const getAllUsers = async (req, res) => {
+    const page = req.query.page;
+    const limit = req.query.limit;
+try {
+    res.json(await getAllUsersFromDB(page,limit));
+} catch (e) {
+    responseError(e, res);
+}
+}
 
-  async getUserById(req, res) {
-    let id = req.params.id;
-    try {
-        var user = await getUserById(id);
-        res.json(user);
-    } catch (e) {
-        responseError(e, res);
-    }
-  }
-};
+export const getUserById = async (req, res) => {
+let id = req.params.id;
+try {
+    res.json(await getUserByIdFromDB(id));
+} catch (e) {
+    responseError(e, res);
+}
+}
+
