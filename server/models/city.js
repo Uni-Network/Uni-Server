@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
         key: 'country_id'
       }
     },
-    city_name: {
+    name: {
       type: DataTypes.STRING,
       allowNull: true
     }

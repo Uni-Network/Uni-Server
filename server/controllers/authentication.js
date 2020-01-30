@@ -1,4 +1,3 @@
-//const User = require('../models').user;
 import {user as User} from '../models';
 import jwt from 'jsonwebtoken';
 const env = process.env.NODE_ENV || 'development';
