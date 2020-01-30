@@ -1,10 +1,10 @@
-import {gender as Gender} from '../models';
+import { gender as Gender } from '../models';
 
-export const getAllGenders = (req, res) => {
+export const getAllGenders = () => {
     // Return all Genders
-    try {
-        return Gender.findAll();
-    } catch (error) {
-        throw(error)
-    }
-}
+  try {
+    return Gender.findAll();
+  } catch (error) {
+    throw (error);
+  }
+};

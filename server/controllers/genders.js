@@ -14,8 +14,7 @@ module.exports = {
 
   async getAllGenders(req, res) {
     try {
-      var user = await getAllGenders();
-      res.json(user);
+      res.json(await getAllGenders());
   } catch (e) {
       responseError(e, res);
   }

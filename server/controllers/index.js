@@ -5,9 +5,6 @@ const countries = require('./countries');
 const groups = require('./groups');
 
 
-
-
-
 module.exports = {
-  genders,users,authentication,countries,groups
+  genders, users, authentication, countries, groups,
 };
