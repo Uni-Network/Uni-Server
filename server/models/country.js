@@ -8,10 +8,31 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    country_name: {
+    name: {
       type: DataTypes.STRING,
       allowNull: true
-    }
+    },
+    iso: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    nicename: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    iso3: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    numcode: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    phonecode: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+
   }, {
     timestamps: false,
     freezeTableName: true,
