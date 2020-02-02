@@ -1,33 +1,38 @@
 import { user as User } from '../models';
 import jwt from 'jsonwebtoken';
+import eConst from '../utils/errorsManager/errorTypes';
+import { responseError } from '../utils/errorsManager/error-responses'; // Error Constants
 const env = process.env.NODE_ENV || 'development';
-const config = require(`${__dirname}/../config/config.json`)[env];
+const { secret, token_expiration } = require(`${__dirname}/../config/config.json`)[env];
 
-module.exports = {
-  userLogin(req, res) {
-    // perform user login
+function cleanedUser(user) {
+  delete user.password;
+  delete user.thumbnail_link;
+  delete user.fullsize_link;
+  return user;
+}
 
-    return User.findOne({ where: { email: req.body.email } }).then(
-        (response, error) => {
-          if (error) {
-            return res.json({ error: true, message: error });
-          }
-          if (!response) {
-            return res.json({ error: true, message: 'User not found' });
-          }
-          if (response.password !== req.body.password) {
-            return res.json({ error: true, message: 'Password mismatch' });
-          }
-          const token = jwt.sign(response.toJSON(), config.secret, {
-            expiresIn: 10000,
-          });
+export async function userLogin(req, res) {
+  // perform user login
+  try {
+    const response = await User.findOne({ where: { email: req.body.email } });
+    if (!response) {
+      responseError(eConst.USER_NOTFOUND, res);
+    } else if (response.password !== req.body.password) {
+      responseError(eConst.PASSWORD_MISMATCH, res);
+    } else {
+      const user = cleanedUser(response.toJSON());
+      const token = jwt.sign(user, secret, {
+        expiresIn: token_expiration,
+      });
 
-          res.json({
-            error: false,
-            message: 'Validation successful!',
-            token,
-          });
-        }
-    );
-  },
-};
+      res.json({
+        error: false,
+        message: 'Validation successful!',
+        token,
+      });
+    }
+  } catch (e) {
+    responseError(e, res);
+  }
+}

@@ -1,25 +1,25 @@
 /* jshint indent: 2 */
 
-module.exports = function(sequelize, DataTypes) {
+export default function (sequelize, DataTypes) {
   return sequelize.define('skill', {
     skill_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
     skill_name: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
     skill_description: {
       type: DataTypes.STRING,
-      allowNull: true
-    }
+      allowNull: true,
+    },
   }, {
     timestamps: false,
     freezeTableName: true,
   }, {
-    tableName: 'skill'
+    tableName: 'skill',
   });
-};
+}

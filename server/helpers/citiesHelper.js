@@ -1,25 +1,25 @@
-import {city as City} from '../models';
-var Sequelize = require('sequelize');
+import { city as City } from '../models';
+import Sequelize from 'sequelize';
 
-export const getAllCitiesFromDB = async () => {
+export async function getAllCitiesFromDB() {
     // Return all countries
-    try {
-        return await City.findAll();
-    } catch (error) {
-        throw(error)
-    }
+  try {
+    return City.findAll();
+  } catch (error) {
+    throw (error);
+  }
 }
-export const getCitiesByNameFromDB = async (name) => {
+export async function getCitiesByNameFromDB(name) {
     // Return all countries that match the specific name
-    try {
-        return City.findAll({
-            where: {
-                name: {
-                    [Sequelize.Op.iLike]: '%' + name + '%'
-                }
-            }
+  try {
+    return await City.findAll({
+      where: {
+        name: {
+          [Sequelize.Op.iLike]: `%${name}%`,
+        },
+      },
     });
-    } catch (error) {
-        throw(error)
-    }
+  } catch (error) {
+    throw (error);
+  }
 }

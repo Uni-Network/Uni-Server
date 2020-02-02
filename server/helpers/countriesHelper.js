@@ -1,25 +1,25 @@
-import {country as Country} from '../models';
-var Sequelize = require('sequelize');
+import { country as Country } from '../models';
+const Sequelize = require('sequelize');
 
-export const getAllCountriesFromDB = async () => {
+export async function getAllCountriesFromDB() {
     // Return all countries
-    try {
-        return Country.findAll();
-    } catch (error) {
-        throw(error)
-    }
+  try {
+    return Country.findAll();
+  } catch (error) {
+    throw (error);
+  }
 }
-export const getCountryByNameFromDB = async (name) => {
+export async function getCountryByNameFromDB(name) {
     // Return all countries that match the specific name
-    try {
-        return Country.findAll({
-            where: {
-                name: {
-                    [Sequelize.Op.iLike]: '%' + name + '%'
-                }
-            }
+  try {
+    return await Country.findAll({
+      where: {
+        name: {
+          [Sequelize.Op.iLike]: `%${name}%`,
+        },
+      },
     });
-    } catch (error) {
-        throw(error)
-    }
+  } catch (error) {
+    throw (error);
+  }
 }

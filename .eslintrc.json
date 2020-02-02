@@ -3,5 +3,16 @@
     "installedESLint": true,
     "plugins": [
         "react"
-    ]
+    ],
+    "env": {
+        "node": true,
+        "es6": true
+    },
+
+    "parserOptions": {
+        "ecmaVersion": 8
+    },
+    "rules": {
+        "no-param-reassign": 0
+    }
 }

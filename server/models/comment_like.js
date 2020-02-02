@@ -1,6 +1,6 @@
 /* jshint indent: 2 */
 
-module.exports = function(sequelize, DataTypes) {
+export default function (sequelize, DataTypes) {
   return sequelize.define('comment_like', {
     comment_id: {
       type: DataTypes.INTEGER,
@@ -9,29 +9,29 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       references: {
         model: 'comment',
-        key: 'comment_id'
-      }
+        key: 'comment_id',
+      },
     },
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'user',
-        key: 'user_id'
-      }
+        key: 'user_id',
+      },
     },
     like_type_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'like_type',
-        key: 'like_type_id'
-      }
-    }
+        key: 'like_type_id',
+      },
+    },
   }, {
     timestamps: false,
     freezeTableName: true,
   }, {
-    tableName: 'comment_like'
+    tableName: 'comment_like',
   });
-};
+}

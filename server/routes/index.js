@@ -1,5 +1,3 @@
-const gendersController = require('../controllers').genders;
-const usersController = require('../controllers').users;
 import { getAllCountries, getCountryByName } from '../controllers/countries';
 import { getAllCities, getCitiesByName } from '../controllers/cities';
 import { getAllGroups, getGroupsByName } from '../controllers/groups';
@@ -7,8 +5,11 @@ import { getAllGroups, getGroupsByName } from '../controllers/groups';
 
 import authMiddlewares from '../middlewares/authentication';
 
-const authenticationController = require('../controllers').authentication;
-
+import {
+  authentication as authenticationController,
+  genders as gendersController,
+  users as usersController,
+} from '../controllers';
 
 module.exports = (app) => {
   app.get('/api', (req, res) => res.status(200).send({

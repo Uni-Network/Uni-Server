@@ -1,28 +1,28 @@
 /* jshint indent: 2 */
 
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('user_has_group', {
+export default function (sequelize, DataTypes) {
+  return sequelize.define('user_groups', {
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       references: {
         model: 'user',
-        key: 'user_id'
-      }
+        key: 'user_id',
+      },
     },
     group_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'group',
-        key: 'group_id'
-      }
-    }
+        key: 'group_id',
+      },
+    },
   }, {
     timestamps: false,
     freezeTableName: true,
   }, {
-    tableName: 'user_has_group'
+    tableName: 'user_groups',
   });
-};
+}

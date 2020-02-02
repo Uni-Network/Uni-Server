@@ -1,13 +1,14 @@
 {
   "development": {
-    
+
     "username": "younes@uniworld",
     "password": "STARlife123456",
     "database": "uniworld",
     "host": "uniworld.postgres.database.azure.com",
     "port": 5432,
     "dialect": "postgres",
-    "secret" : "ssssshhhhh"
+    "secret" : "ssssshhhhh",
+    "token_expiration": 10000
   },
   "test": {
     "username": "postgres",
@@ -16,6 +17,7 @@
     "host": "localhost",
     "port": 5432,
     "dialect": "postgres",
-    "secret" : "ssssshhhhh"
+    "secret" : "ssssshhhhh",
+    "token_expiration": 10000
   }
 }

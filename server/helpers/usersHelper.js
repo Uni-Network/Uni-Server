@@ -1,24 +1,21 @@
-const User = require('../models').user;
+import { paginate } from '../utils/sharedMethodes';
+import {user as User} from '../models';
+// const User = require('../models').user;
 import errorTypes from '../utils/errorsManager/errorTypes'
+import { userInGroup } from './groupsHelper';
 
-const paginate = ( page, limit ) => {
-    limit = (limit)?limit:10;
-    page = (page)?page:0;
-    const offset = page * limit;
-  
-    return {
-      offset,
-      limit,
-    };
-};
-export const getAllUsersFromDB = async (page, limit) => {
+
+export async function getAllUsersFromDB(page, limit) {
     // Return all users without password Attribute
+    console.log('Hello World');
+    console.log(await userInGroup(1, 1));
     try {
-        return await User.findAndCountAll({attributes: {exclude:['password']},...paginate(page, limit)});
-    } catch(error) {
-        throw(error)
+        return await User.findAndCountAll({ attributes: { exclude: ['password'] }, ...paginate(page, limit) });
+    } catch (error) {
+        throw(error);
     }
 }
+
 export const getUserByIdFromDB = async (userId) => {
     try {
         let user = await User.findById(userId);
