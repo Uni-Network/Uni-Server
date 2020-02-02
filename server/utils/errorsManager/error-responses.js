@@ -10,7 +10,8 @@ export function responseError(errorType, res) {
     USER_NOTFOUND,
     PASSWORD_MISMATCH,
     INVALID_TOKEN,
-    NO_TOKEN
+    NO_TOKEN,
+    BAD_REQUEST,
   } = eConst;
   switch (errorType) {
     case FORBIDDEN:
@@ -36,6 +37,10 @@ export function responseError(errorType, res) {
     case NO_TOKEN:
       res.statusCode = 401;
       errResponse = Boom.unauthorized('No token provided.');
+      break;
+    case BAD_REQUEST:
+      res.statusCode = 400;
+      errResponse = Boom.badRequest(errorType);
       break;
     case NOTFOUND:
       res.statusCode = 404;

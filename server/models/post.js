@@ -24,12 +24,11 @@ export default function (sequelize, DataTypes) {
         key: 'user_id',
       },
     },
-    post_text: {
+    text: {
       type: DataTypes.STRING,
       allowNull: true,
     },
   }, {
-    timestamps: false,
     freezeTableName: true,
   }, {
     tableName: 'post',

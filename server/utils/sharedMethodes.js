@@ -6,3 +6,6 @@ export function paginate(page = 0, limit = 10) {
     limit,
   };
 }
+export function handleError(e) {
+  throw (e);
+}

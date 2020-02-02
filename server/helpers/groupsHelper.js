@@ -6,14 +6,14 @@ import { user_groups as UserGroups } from '../models';
 const Sequelize = require('sequelize');
 
 export async function userInGroup(userId, groupId) {
-  const count = await UserGroups.count({ where: { user_id: userId, group_id: groupId } });
-  return (count > 0);
+  const response = await UserGroups.findOne({ where: { user_id: userId, group_id: groupId } });
+  return response != null;
 }
 
 export async function getAllGroupsFromDB() {
     // Return all countries
   try {
-    return Group.findAll();
+    return await Group.findAll();
   } catch (error) {
     throw (error);
   }
@@ -21,7 +21,7 @@ export async function getAllGroupsFromDB() {
 export async function getGroupsByNameFromDB(name) {
     // Return all countries that match the specific name
   try {
-    return Group.findAll({
+    return await Group.findAll({
       where: {
         group_name: {
           [Sequelize.Op.iLike]: `%${name}%`,

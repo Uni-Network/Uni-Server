@@ -10,6 +10,7 @@ import {
   genders as gendersController,
   users as usersController,
 } from '../controllers';
+import { createPost } from '../controllers/posts';
 
 module.exports = (app) => {
   app.get('/api', (req, res) => res.status(200).send({
@@ -36,4 +37,7 @@ module.exports = (app) => {
   // Group Routes
   app.get('/api/groups', getAllGroups);
   app.get('/api/groups/search', getGroupsByName);
+
+  // Post Routes
+  app.post('/api/posts', createPost);
 };
