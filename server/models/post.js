@@ -28,6 +28,10 @@ export default function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true,
     },
+    is_deleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
   }, {
     freezeTableName: true,
   }, {

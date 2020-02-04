@@ -1,4 +1,4 @@
-import { paginate } from '../utils/sharedMethodes';
+import { handleError, paginate } from '../utils/sharedMethodes';
 import {user as User} from '../models';
 import errorTypes from '../utils/errorsManager/errorTypes'
 import { userInGroup } from './groupsHelper';
@@ -6,8 +6,6 @@ import { userInGroup } from './groupsHelper';
 
 export async function getAllUsersFromDB(page, limit) {
     // Return all users without password Attribute
-    console.log('Hello World');
-    console.log(await userInGroup(5, 3));
     try {
         return await User.findAndCountAll({ attributes: { exclude: ['password'] }, ...paginate(page, limit) });
     } catch (error) {
@@ -21,8 +19,8 @@ export async function getUserByIdFromDB(userId) {
         if(user !== null){
             return user;
         }
-        throw(errorTypes.NOTFOUND)
+        handleError(errorTypes.NOTFOUND)
     } catch(error) {
-        throw(error)
+        handleError(error)
     }
 }

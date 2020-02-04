@@ -1,6 +1,7 @@
 import { getAllCountries, getCountryByName } from '../controllers/countries';
 import { getAllCities, getCitiesByName } from '../controllers/cities';
-import { getAllGroups, getGroupsByName } from '../controllers/groups';
+import { getAllGroups, getGroupsByName, getGroupPosts } from '../controllers/groups';
+import { createPost, updatePost, deletePost } from '../controllers/posts';
 
 
 import authMiddlewares from '../middlewares/authentication';
@@ -10,7 +11,7 @@ import {
   genders as gendersController,
   users as usersController,
 } from '../controllers';
-import { createPost } from '../controllers/posts';
+import { getCurrentUserVisiblePosts } from '../controllers/users';
 
 module.exports = (app) => {
   app.get('/api', (req, res) => res.status(200).send({
@@ -19,6 +20,8 @@ module.exports = (app) => {
   app.post('/api/login', authenticationController.userLogin);
   app.use(authMiddlewares);
   app.get('/api/genders', gendersController.getAllGenders);
+
+  // Home Page
 
 
   // Country Routes
@@ -32,12 +35,16 @@ module.exports = (app) => {
   // User Routes
   app.get('/api/users', usersController.getAllUsers);
   app.get('/api/users/:id', usersController.getUserById);
+  app.get('/api/users/current/posts', getCurrentUserVisiblePosts);
 
 
   // Group Routes
   app.get('/api/groups', getAllGroups);
   app.get('/api/groups/search', getGroupsByName);
+  app.get('/api/groups/:groupId/posts', getGroupPosts);
 
   // Post Routes
   app.post('/api/posts', createPost);
+  app.put('/api/posts/:post_id', updatePost);
+  app.delete('/api/posts/:post_id', deletePost);
 };
