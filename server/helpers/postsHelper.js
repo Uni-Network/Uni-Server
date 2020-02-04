@@ -1,8 +1,8 @@
-import { userInGroup } from './groupsHelper';
-import { post as Post } from '../models';
-
+import { getUserGroupsIdsFromDB, userInGroup } from './groupsHelper';
+import db,{ post as Post, group as Group } from '../models';
 import eConst from '../utils/errorsManager/errorTypes';
-import { handleError } from '../utils/sharedMethodes'; // Error Constants
+import { handleError } from '../utils/sharedMethodes';
+import * as Sequelize from 'sequelize';
 
 
 /**
@@ -79,6 +79,41 @@ export async function deletePostFromDB(postId, userId) {
     } else {
       handleError(eConst.NOTFOUND);
     }
+  } catch (e) {
+    handleError(e);
+  }
+  return null;
+}
+
+export async function getGroupPostsFromDB(userId, groupId) {
+  try {
+    if (await userInGroup(userId, groupId)) {
+      return await Post.findAll({ where: { group_id: groupId, is_deleted: false } });
+    }
+    handleError(eConst.UNAUTHORIZED);
+  } catch (e) {
+    handleError(e);
+  }
+  return null;
+}
+async function selectQueryGenerator(data){
+  return await db.sequelize.query(
+    data, { type: Sequelize.QueryTypes.SELECT }
+  );
+}
+
+export async function getUserPostsVisibleFromDB(userId, { offset, limit } = { offset: 0, limit: 3 }) {
+  try {
+    const dataQuery = `SELECT * FROM post 
+        WHERE (group_id IN (SELECT group_id FROM user_groups where user_id = ${userId}) 
+        AND (is_deleted = false)) ORDER BY \"createdAt\" DESC OFFSET ${offset} LIMIT ${limit}`;
+    const countQuery = `SELECT COUNT(*) as count FROM post 
+        WHERE (group_id IN (SELECT group_id FROM user_groups where user_id = ${userId}) 
+        AND (is_deleted = false))`;
+    const [rows, count] = await Promise.all(
+      [selectQueryGenerator(dataQuery), selectQueryGenerator(countQuery)]
+    );
+    return { count: count[0].count,page: (offset / limit + 1), limit, rows };
   } catch (e) {
     handleError(e);
   }

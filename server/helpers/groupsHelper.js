@@ -2,6 +2,7 @@
 import { group as Group } from '../models';
 // eslint-disable-next-line camelcase,no-duplicate-imports,import/no-duplicates
 import { user_groups as UserGroups } from '../models';
+import { handleError } from '../utils/sharedMethodes';
 
 const Sequelize = require('sequelize');
 
@@ -30,5 +31,12 @@ export async function getGroupsByNameFromDB(name) {
     });
   } catch (error) {
     throw (error);
+  }
+}
+export async function getUserGroupsIdsFromDB(userId) {
+  try {
+    return await UserGroups.findAll({ where: { user_id: userId }, attributes: ['group_id'] });
+  } catch (e) {
+    handleError(e);
   }
 }
