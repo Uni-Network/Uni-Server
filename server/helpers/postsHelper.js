@@ -50,10 +50,10 @@ export async function updatePostInDB(postId, userId, updatedPost) {
         && groupId === originalPost.group_id
         && originalPost.is_deleted === false
       ) {
-        const updatedUser = await Post.update(
+        const updatedPost = await Post.update(
           { text: updatedPost.text },
           { where: { post_id: postId }, returning: true });
-        return updatedUser[1][0];
+        return updatedPost[1][0];
       }
       handleError(eConst.UNAUTHORIZED);
     } else {
