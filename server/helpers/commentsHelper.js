@@ -10,7 +10,7 @@ import { getPost } from './postsHelper';
 
 
 
-export async function CommentAPost(userId, postId, groupId, comment) {
+export async function CommentAPostInDB(userId, postId, groupId, comment) {
   
   try {
     const results = await Promise.all([getPost(postId), userInGroup(userId, groupId)]);
@@ -35,7 +35,7 @@ export async function CommentAPost(userId, postId, groupId, comment) {
 
 
 
-  export async function GetCommentsOfPost(postId) {
+  export async function GetCommentsOfPostFromDB(postId) {
     try {
       const commentedPost = await getPost(postId);
       if(commentedPost.is_deleted === false){
@@ -110,4 +110,3 @@ export async function CommentAPost(userId, postId, groupId, comment) {
       }
       return null;
     }
-    
