@@ -7,7 +7,14 @@ import { getPost } from './postsHelper';
 
 
 
-
+export async function getComment(commentId) {
+  try {
+    return await Comment.findById(commentId);
+  } catch (e) {
+    handleError(e);
+  }
+  return null;
+}
 
 
 export async function CommentAPostInDB(userId, postId, groupId, comment) {
@@ -15,15 +22,21 @@ export async function CommentAPostInDB(userId, postId, groupId, comment) {
   try {
     const results = await Promise.all([getPost(postId), userInGroup(userId, groupId)]);
     const [commentedPost, isUserInGroup] = results;
-    if (originalPost) {
+    if (commentedPost) {
       if (
         isUserInGroup
         && groupId === commentedPost.group_id
         && commentedPost.is_deleted === false
       ) {
         return await Comment.create({ text: comment.text, post_id: postId, user_id: userId });
+        console.log(isUserInGroup
+          && groupId === commentedPost.group_id
+          && commentedPost.is_deleted === false);
       }
       handleError(eConst.UNAUTHORIZED);
+      console.log(isUserInGroup
+        && groupId === commentedPost.group_id
+        && commentedPost.is_deleted === false);
     } else {
       handleError(eConst.NOTFOUND);
     }
@@ -52,7 +65,7 @@ export async function CommentAPostInDB(userId, postId, groupId, comment) {
       
       try {
         const commentedPost = await getPost(postId);
-        const theComment = await getPost(commentId);
+        const theComment = await getComment(commentId);
         const isUserInGroup = await userInGroup(userId, groupId);
     
         if (commentedPost && theComment) {
@@ -85,7 +98,7 @@ export async function CommentAPostInDB(userId, postId, groupId, comment) {
       
       try {
         const commentedPost = await getPost(postId);
-        const theComment = await getPost(commentId);
+        const theComment = await getComment(commentId);
         const isUserInGroup = await userInGroup(userId, groupId);
     
         if (commentedPost && theComment) {

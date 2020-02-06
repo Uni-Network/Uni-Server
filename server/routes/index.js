@@ -2,7 +2,7 @@ import { getAllCountries, getCountryByName } from '../controllers/countries';
 import { getAllCities, getCitiesByName } from '../controllers/cities';
 import { getAllGroups, getGroupsByName, getGroupPosts } from '../controllers/groups';
 import { createPost, updatePost, deletePost } from '../controllers/posts';
-
+import { CommentAPost, GetCommentsOfPost, deleteComment, updateComment } from '../controllers/comments';
 
 import authMiddlewares from '../middlewares/authentication';
 
@@ -47,4 +47,11 @@ module.exports = (app) => {
   app.post('/api/posts', createPost);
   app.put('/api/posts/:post_id', updatePost);
   app.delete('/api/posts/:post_id', deletePost);
+
+  //Comments Routes
+  app.get('/api/comments/:post_id', GetCommentsOfPost);
+  app.post('/api/comments', CommentAPost);
+  app.put('/api/comments/:comment_id', updateComment);
+  app.delete('/api/comments/:comment_id', deleteComment);
+  
 };

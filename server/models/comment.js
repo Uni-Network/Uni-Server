@@ -24,8 +24,8 @@ export default function (sequelize, DataTypes) {
         key: 'user_id',
       },
     },
-    user_promo_id: {
-      type: DataTypes.INTEGER,
+    is_deleted: {
+      type: DataTypes.BOOLEAN,
       allowNull: true,
     },
     text: {
