@@ -1,7 +1,7 @@
 /* jshint indent: 2 */
 
 export default function (sequelize, DataTypes) {
-  return sequelize.define('user', {
+  return sequelize.define('theuser', {
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -64,6 +64,6 @@ export default function (sequelize, DataTypes) {
     timestamps: false,
     freezeTableName: true,
   }, {
-    tableName: 'user',
+    tableName: 'theuser',
   });
 }

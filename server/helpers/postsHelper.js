@@ -96,7 +96,7 @@ export async function getGroupPostsFromDB(userId, groupId) {
   }
   return null;
 }
-async function selectQueryGenerator(data){
+export async function selectQueryGenerator(data){
   return await db.sequelize.query(
     data, { type: Sequelize.QueryTypes.SELECT }
   );
