@@ -1,7 +1,7 @@
 import { like_type as likeType } from '../models';
 import Sequelize from 'sequelize';
 
-export async function getAllCitiesFromDB() {
+export async function getAlllikesTypeFromDB() {
     // Return all countries
   try {
     return likeType.findAll();
