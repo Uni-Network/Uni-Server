@@ -11,7 +11,7 @@ import {
   genders as gendersController,
   users as usersController,
 } from '../controllers';
-import { getCurrentUserVisiblePosts } from '../controllers/users';
+import { getCurrentUserVisiblePosts ,registerUser} from '../controllers/users';
 
 module.exports = (app) => {
   app.get('/api', (req, res) => res.status(200).send({
@@ -36,7 +36,8 @@ module.exports = (app) => {
   app.get('/api/users', usersController.getAllUsers);
   app.get('/api/users/:id', usersController.getUserById);
   app.get('/api/users/current/posts', getCurrentUserVisiblePosts);
-
+  app.post('/api/users/registration', registerUser);
+  
 
   // Group Routes
   app.get('/api/groups', getAllGroups);
