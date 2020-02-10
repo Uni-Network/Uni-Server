@@ -60,6 +60,10 @@ export default function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    is_active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
   }, {
     timestamps: false,
     freezeTableName: true,
