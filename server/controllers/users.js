@@ -20,6 +20,7 @@ export async function getUserById(req, res) {
     responseError(e, res);
   }
 }
+
 export async function getCurrentUserVisiblePosts(req, res) {
   const { user_id } = req.user;
   const { page, limit } = req.query;
@@ -33,11 +34,8 @@ export async function getCurrentUserVisiblePosts(req, res) {
 
 export async function registerUser(req, res) {
   const fileLocation = req.file.path;
-  console.log(fileLocation);
-  
   try {
-    res.json(await registerUserInDB(fileLocation));
-    
+    res.json(await registerUserInDB(fileLocation));    
   } catch (e) {
     responseError(e, res);
   }

@@ -13,12 +13,11 @@ var storage = multer.diskStorage({
     }
   });
   
-  export var upload = multer({ //multer settings
+  export var upload = multer({ 
     storage: storage
   });
   
  export function validate(req, res, next) {
-     console.log("inside validate function");
     if (!req.file) {
       return res.send({
         errors: {
