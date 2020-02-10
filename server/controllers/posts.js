@@ -42,7 +42,7 @@ export async function getNumReactionsForApost(req, res) {
 }
 
 export async function getUserReactions(req, res) {
-  const postId = req.body.post_id;
+  const postId = req.params.post_id;
   const { page, limit } = req.query;
   const offset = limit * (page - 1);
   try {

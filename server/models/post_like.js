@@ -7,7 +7,7 @@ export default function (sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'user',
+        model: 'theuser',
         key: 'user_id',
       },
     },

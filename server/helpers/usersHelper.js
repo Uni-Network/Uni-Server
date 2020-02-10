@@ -1,5 +1,5 @@
 import { handleError, paginate } from '../utils/sharedMethodes';
-import {user as User} from '../models';
+import {theuser as User} from '../models';
 import errorTypes from '../utils/errorsManager/errorTypes'
 import { userInGroup } from './groupsHelper';
 

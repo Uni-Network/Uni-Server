@@ -1,4 +1,4 @@
-import { user as User } from '../models';
+import { theuser as User } from '../models';
 import jwt from 'jsonwebtoken';
 import eConst from '../utils/errorsManager/errorTypes';
 import { responseError } from '../utils/errorsManager/error-responses'; // Error Constants

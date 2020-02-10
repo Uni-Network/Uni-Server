@@ -16,7 +16,7 @@ export default function (sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'user',
+        model: 'theuser',
         key: 'user_id',
       },
     },
