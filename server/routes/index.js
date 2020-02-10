@@ -3,7 +3,7 @@ import { getAllCities, getCitiesByName } from '../controllers/cities';
 import { getAllGroups, getGroupsByName, getGroupPosts } from '../controllers/groups';
 import { createPost, updatePost, deletePost, getNumReactionsForApost, getUserReactions } from '../controllers/posts';
 import { CommentAPost, GetCommentsOfPost, deleteComment, updateComment } from '../controllers/comments';
-
+import {upload, validate} from '../helpers/uploadHelper';
 import authMiddlewares from '../middlewares/authentication';
 
 import {
@@ -36,7 +36,7 @@ module.exports = (app) => {
   app.get('/api/users', usersController.getAllUsers);
   app.get('/api/users/:id', usersController.getUserById);
   app.get('/api/users/current/posts', getCurrentUserVisiblePosts);
-  app.post('/api/users/registration', registerUser);
+  app.post('/api/users/registration',upload.single('file'), validate, registerUser);
   
 
   // Group Routes

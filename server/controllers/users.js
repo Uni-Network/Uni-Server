@@ -32,9 +32,11 @@ export async function getCurrentUserVisiblePosts(req, res) {
 }
 
 export async function registerUser(req, res) {
-  console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+  const fileLocation = req.file.path;
+  console.log(fileLocation);
+  
   try {
-    res.json(await registerUserInDB(req.body.file));
+    res.json(await registerUserInDB(fileLocation));
     
   } catch (e) {
     responseError(e, res);
