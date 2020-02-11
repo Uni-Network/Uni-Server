@@ -12,7 +12,7 @@ var options = {
 var client = nodemailer.createTransport(sgTransport(options));
 
 
-export function sendmail(email){
+export async function sendmail(email){
 client.sendMail(email, function(err, info){
     if (err ){
       console.log(error);
