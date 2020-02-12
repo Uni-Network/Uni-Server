@@ -10,7 +10,7 @@ export async function changeUserPassword(myemail){
       to: myemail,
       subject: 'uniworld new password',
       text: 'hello, here is your new password : '+ newpassword,
-      html: '<b>Hello world</b>'
+      html: '<b>Hello ,here is your new password : ' +newpassword+ '</b>'
   };
      await User.update({ password: newpassword }, { where: {
         email: myemail,
