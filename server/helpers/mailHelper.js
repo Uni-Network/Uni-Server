@@ -1,23 +1,26 @@
 import nodemailer from 'nodemailer';
-import sgTransport from 'nodemailer-sendgrid-transport';
 
-var options = {
-  service: 'SendGrid',
+
+var transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true, // use SSL
   auth: {
-    api_user: 'KHADIMSafaa',
-    api_key: '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'
-  }
+    user: "uniworld.app.team@gmail.com", // generated ethereal user
+    pass: "hmmcantdecide123" // generated ethereal password
+  },
+ tls:{
+  rejectUnauthorized: false
 }
+});
 
-var client = nodemailer.createTransport(sgTransport(options));
 
-
-export async function sendmail(email){
-client.sendMail(email, function(err, info){
-    if (err ){
-      console.log(error);
+export async function sendmail(mailOptions){
+transporter.sendMail(mailOptions, function(error, info){
+    if(error){
+        return console.log(error);
     }
-    else {
-      console.log('Message sent: ' + info.response);
-    }
+    console.log('Message sent: ' + info.response);
 })};
+
+

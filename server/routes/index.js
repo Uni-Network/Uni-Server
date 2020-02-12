@@ -3,6 +3,7 @@ import { getAllCities, getCitiesByName } from '../controllers/cities';
 import { getAllGroups, getGroupsByName, getGroupPosts } from '../controllers/groups';
 import { createPost, updatePost, deletePost, getNumReactionsForApost, getUserReactions } from '../controllers/posts';
 import { CommentAPost, GetCommentsOfPost, deleteComment, updateComment } from '../controllers/comments';
+import {changepassword } from '../controllers/firstLogin';
 import {upload, validate} from '../helpers/uploadHelper';
 import authMiddlewares from '../middlewares/authentication';
 
@@ -60,4 +61,7 @@ module.exports = (app) => {
   //Likes routes
   app.get('/api/reactions/:post_id', getNumReactionsForApost);
   app.get('/api/reactions/users/:post_id', getUserReactions);
+
+  //first login routes
+  app.put('/api/firstLogin/step1', changepassword);
 };
